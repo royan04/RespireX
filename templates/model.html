@@ -1,0 +1,48 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="border-2 border-black p-16">
+        <div class="flex flex-col items-center">
+            <label for="file-upload" class="flex items-center justify-center w-48 h-48 bg-gray-700 rounded-full cursor-pointer">
+                <i class="fas fa-upload text-white text-6xl"></i>
+                <input id="file-upload" type="file" class="hidden">
+            </label>
+            <div class="border-t-2 border-black w-full mt-8"></div>
+            <button class="mt-4 px-6 py-2 bg-blue-500 text-white text-lg font-bold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                Upload Files
+            </button>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.getElementById('file-upload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            // Optional: Preview or validate the file
+            console.log("File selected:", file.name);
+    
+            // Store it in a variable or send it to the server
+            const formData = new FormData();
+            formData.append("image", file);
+    
+            // Send to backend for prediction
+            fetch("/predict", {
+                method: "POST",
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Prediction: " + data.result);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        }
+    });
+    </script>
+    
+</html>
