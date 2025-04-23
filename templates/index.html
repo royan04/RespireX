@@ -1,305 +1,397 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Responsive Hospital Website Design Tutorial</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lung Disease Detection</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="/static/abc.css" />
 </head>
 
 <body>
-    <header>
-        <a href="/model" class="logo"><span>D</span>octors <span>C</span>ares.</a>
 
-        <nav class="navbar">
-            <ul>
-                <li><a href="#home">home</a></li>
-                <li><a href="#about">about</a></li>
-                <li><a href="#doctor">doctor</a></li>
-                <li><a href="#review">review</a></li>
-                <li><a href="#contact">contact</a></li>
-                <li><a href="#blog">blog</a></li>
-            </ul>
-        </nav>
+  <!-- Background Video (spans entire screen) -->
+  <video autoplay muted loop playsinline class="bg-video">
+    <source src="/static/images/homepage1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
 
-        <div class="fas fa-bars"></div>
-    </header>
+  <!-- Hero Section with Navbar -->
+  <section class="main-section">
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <img src="/static/images/logo1.png" alt="Logo" class="logo">
+        <a href="/model" class="logo"><span class="brand-name"> RespireX</span></a>
+      </div>
+      <div class="nav-right">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
-    <section id="home" class="home">
-
-        <div class="row">
-            <div class="images">
-                <img src="/static/images/home.png" alt="">
-            </div>
-
-            <div class="content">
-                <h1><span>Stay</span> Safe, <span>Stay</span> Healthy.</h1>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa, officiis.</p>
-                <a href="#"><button class="button">read more</button></a>
-            </div>
+    <!-- Center Hero Content -->
+    <section class="center" id="home">
+      <div class="center-content">
+        <h1>Welcome to RespireX</h1>
+        <p class="tagline">Revolutionary AI-powered Lung Disease Detection</p>
+        <div class="hero-features">
+          <div class="feature">
+            <i class="fas fa-bolt"></i>
+            <span>Instant analysis in under 30 seconds</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-shield-alt"></i>
+            <span>98.7% diagnostic accuracy</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-clock"></i>
+            <span>24/7 availability</span>
+          </div>
         </div>
+        <p class="cta-text">
+          Early detection saves lives. Our advanced AI system identifies potential lung abnormalities 
+          with hospital-grade accuracy from the comfort of your home.
+        </p>
+        <a href="signup.html" class="neon-button">Sign Up/Register</a>
+      </div>
     </section>
 
-    <section id="about" class="about">
+  </section>
 
-        <h1 class="heading">about our facility</h1>
-        <h3 class="title">learn and explore our facility</h3>
-
-        <div class="box-container">
-
-            <!-- start here  -->
-            <div class="box">
-                <!-- about images  -->
-                <div class="images">
-                    <img src="/static/images/about-1.png" alt="">
-                </div>
- 
-                <div class="content">
-                    <h3>ambulance services</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab necessitatibus omnis unde dolore suscipit magnam officia. Maxime explicabo qui distinctio?</p>
-                 <a href="#"><button class="button">learn more</button></a>   
-                </div>
+  <!-- About Section (after full-screen hero) -->
+  <section class="about-section" id="about">
+    <h1 class="about-heading">About Us</h1>
+    
+    <div class="facility-section">
+      <!-- Enhanced Left Side -->
+      <div class="about-left">
+        <div class="inner-box">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12,2L1,12H5V22H19V12H23L12,2M12,5L18,11V20H14V14H10V20H6V11L12,5Z" />
+            </svg>
+          </div>
+          <h2 id="facility-title">AI-Powered Diagnostics</h2>
+          <div class="feature-highlights">
+            <div class="feature">
+              <div class="feature-bullet"></div>
+              <p>98.7% detection accuracy</p>
             </div>
-
-            <div class="box">
-                <div class="images">
-                    <img src="/static/images/about-2.png" alt="">
-                </div>
-                
-                <div class="content">
-                    <h3>emergency rooms</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab necessitatibus omnis unde dolore suscipit magnam officia. Maxime explicabo qui distinctio?</p>
-                 <a href="#"><button class="button">learn more</button></a>   
-                </div>
+            <div class="feature">
+              <div class="feature-bullet"></div>
+              <p>Instant results in under 30 seconds</p>
             </div>
- 
-            <div class="box">
-
-                <div class="images">
-                    <img src="/static/images/about-3.png" alt="">
-                </div>
-
-                <div class="content">
-                    <h3>free check-ups</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab necessitatibus omnis unde dolore suscipit magnam officia. Maxime explicabo qui distinctio?</p>
-                 <a href="#"><button class="button">learn more</button></a>   
-                </div>
+            <div class="feature">
+              <div class="feature-bullet"></div>
+              <p>24/7 automated analysis</p>
             </div>
-
-           </div>
-
-    <section id="doctor" class="card">
-
-        <div class="container">
-
-            <h1 class="heading">doctors</h1>
-            <h3 class="title">our professional doctors</h3>
-
-            <div class="box-container">
-
-                <!-- start here  -->
-                <div class="box">
-                    <img src="/static/images/doctor-1.jpg" alt="">                
-                    
-                    <div class="content">
-                        <a href="#">
-                            <h2>john doe</h2>
-                        </a>
-                        <p>professional</p>
-
-                        <!-- card icons  -->
-                        <div class="icons">
-                            <a href="#" class="fab fa-facebook-f"></a>
-                            <a href="#" class="fab fa-twitter"></a>
-                            <a href="#" class="fab fa-instagram"></a>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="box">
-                    <img src="/static/images/doctor-2.jpg" alt="">                
-                    
-                    <div class="content">
-                        <a href="#">
-                            <h2>john doe</h2>
-                        </a>
-                        <p>professional</p>
-
-                        <!-- card icons  -->
-                        <div class="icons">
-                            <a href="#" class="fab fa-facebook-f"></a>
-                            <a href="#" class="fab fa-twitter"></a>
-                            <a href="#" class="fab fa-instagram"></a>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="box">
-                    <img src="/static/images/doctor-3.jpg" alt="">                
-                    
-                    <div class="content">
-                        <a href="#">
-                            <h2>john doe</h2>
-                        </a>
-                        <p>professional</p>
-
-                        <!-- card icons  -->
-                        <div class="icons">
-                            <a href="#" class="fab fa-facebook-f"></a>
-                            <a href="#" class="fab fa-twitter"></a>
-                            <a href="#" class="fab fa-instagram"></a>
-                        </div>
-                    </div>
-                </div>
+          </div>
+          <div class="stats-container">
+            <div class="stat">
+              <div class="stat-number" data-count="25000">0</div>
+              <div class="stat-label">Scans Processed</div>
             </div>
+            <div class="stat">
+              <div class="stat-number" data-count="98.7">0</div>
+              <div class="stat-label">Accuracy Rate</div>
+            </div>
+          </div>
         </div>
+      </div>
+  
+      <!-- Right Side with Glow Effect -->
+      <div class="about-right">
+        <div class="image-glow"></div>
+        <img class="slider-img active" src="/static/images/scan0.png" alt="Lung scan analysis 1">
+        <img class="slider-img" src="/static/images/scan.png" alt="Lung scan analysis 2">
+        <img class="slider-img" src="/static/images/scan1.png" alt="Lung scan analysis 3">
+        <img class="slider-img" src="/static/images/scan4.png" alt="Lung scan analysis 4">
+      </div>
+    </div>
+  </section>
+  
+  <!-- doctors -->
+  <div class="transparent-box">
+    <h1>Doctors</h1>
+    <section class="about-doctors">
+      <div class="about-text">
+        <h1>
+          TEAM<br/>OF<br/>
+          <span class="highlight">CARING</span><br/>
+          PROFESSIONALS
+        </h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna.
+        </p>
+        <button>JOIN US</button>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <div class="icon-container"></div>
+          <img src="/static/images/doctor-1.jpg" alt="Doctor 1" />
+        </div>
+        <div class="card black-bg">
+          <div class="icon-container"></div>
+          <img src="/static/images/doctor-2.jpg" alt="Doctor 2" />
+        </div>
+        <div class="card">
+          <div class="icon-container"></div>
+          <img src="/static/images/doctor-3.jpg" alt="Doctor 3" />
+        </div>
+      </div>
     </section>
-    <section id="review" class="review">
+  </div>
 
-        <h1 class="heading">our patient review</h1>
-        <h3 class="title">what patient says about us</h3>
-
-        <div class="box-container">
-            <div class="box">
-                <i class="fas fa-quote-left"></i>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, sit quam ab at nulla quae excepturi laboriosam mollitia illo eius?</p>
-                <div class="images">
-                    <img src="/static/images/img-1.jpg" alt="">
-                    <div class="info">
-                        <h3>john doe</h3>
-                        <span>date : 11 2024</span>
-                    </div>
-                </div>
+  <!-- reviews -->
+  <div class="cover" id="reviews">
+  <section class="reviews-slider">
+    <h2>Patient Reviews</h2>
+    <div class="slider-wrapper">
+      <div class="slider-track">
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/steve.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>The early detection literally saved my life. I didn’t even know I had an issue until the scan.</p>
+              <h3>Steve Amboken</h3><br>
+              <p class="review-role">Lung Diagnosis Patient</p>
             </div>
-            <div class="box">
-                <i class="fas fa-quote-left"></i>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, sit quam ab at nulla quae excepturi laboriosam mollitia illo eius?</p>
-
-                <div class="images">
-                    <img src="/static/images/img-2.jpg" alt="">
-
-                    <div class="info">
-                        <h3>john doe</h3>
-                        <span>date : 11 2024</span>
-                    </div>
-                </div>
-            </div>
-            <div class="box">
-                <i class="fas fa-quote-left"></i>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus, sit quam ab at nulla quae excepturi laboriosam mollitia illo eius?</p>
-
-                <div class="images">
-                    <img src="/static/images/img-3.jpg" alt="">
-
-                    <div class="info">
-                        <h3>john doe</h3>
-                        <span>date : 11 2024</span>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
         </div>
-    </section>
-    <section id="contact" class="contact">
-
-        <h1 class="heading">contact us</h1>
-        <h3 class="title">you can talk to us any times,</h3>
-
-        <div class="row">
-            <div class="images">
-                <img src="/static/images/form.png" alt="">
+        
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/bhoomi.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>I came in with just a mild cough. The team found something serious early. Forever grateful.</p>
+              <h3>Bhoomi Barbole</h3><br>
+              <p class="review-role">Detected Stage 1 COPD</p>
             </div>
-
-            <div class="form-container">    
-
-            <input type="text" placeholder="full name" name="" id="">
-            <input type="email" placeholder="enter your email" name="" id="">
-
-            <input type="number" placeholder="phone" name="" id="">
-            <textarea name="" cols="30" rows="10" id=""></textarea>
-            <input type="submit" value="send">
-            </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
         </div>
-    </section>
-
-    <section id="blog" class="blog">
-
-        <h1 class="heading">blog</h1>
-        <h3 class="title">Lorem ipsum dolor sit amet.</h3>
-
-        <div class="box-container">
-            <div class="box">
-                <img src="/static/images/blog 1.png" alt="">
-
-                <div class="content">
-                    <a href="#">
-                        <h2>diabetes</h2>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, obcaecati iusto aliquid quam repudiandae voluptas!</p>
-                    <a href="#"> <button class="button">learn more</button></a>
-                </div>
+        
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/samiksha.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>The process was smooth, and the results came quickly. I started treatment before it got worse.</p>
+              <h3>Samiksha Bokade</h3><br>
+              <p class="review-role">Lung Screening Patient</p>
             </div>
-            <div class="box">
-                <!-- images  -->
-                <img src="/static/images/blog 2.png" alt="">
-
-                <div class="content">
-                    <a href="#">
-                        <h2>covid-19 vaccine</h2>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, obcaecati iusto aliquid quam repudiandae voluptas!</p>
-                     <!-- button  -->
-                    <a href="#"> <button class="button">learn more</button></a>
-                </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
+        </div>
+        
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/ruth.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>I was worried about my breathing issues. The diagnosis here was fast and accurate.</p>
+              <h3>Ruth Bonala</h3><br>
+              <p class="review-role">Early Lung Disease Detection</p>
             </div>
-            <div class="box">
-                <!-- images  -->
-                <img src="/static/images/blog 3.png" alt="">
-
-                <div class="content">
-                    <a href="#">
-                        <h2>prevent epidemic</h2>
-                    </a>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, obcaecati iusto aliquid quam repudiandae voluptas!</p>
-                     <!-- button  -->
-                    <a href="#"> <button class="button">learn more</button></a>
-                </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
+        </div>
+        
+        <!-- Duplicates for smooth infinite scroll -->
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/royan1.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>The doctors explained everything in simple terms. I felt informed and safe throughout.</p>
+              <h3>Royan Chetty</h3><br>
+              <p class="review-role">Pulmonary Evaluation</p>
             </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
         </div>
-    </section>
-    <section class="footer">
-
-        <div class="box">
-            <h2 class="logo"><span>D</span>octors <span>C</span>ares</h2>
-
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam laboriosam quisquam facere pariatur ratione porro et vero dolore accusamus id?</p>
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/sheldon.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>They detected my lung issue early when others missed it. I’m now on the right treatment.</p>
+              <h3>Sheldon Chetty</h3><br>
+              <p class="review-role">Lung Care Patient</p>
+            </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
         </div>
-
-        <div class="box">
-            <h2 class="logo"><span>S</span>hare</h2>
-
-            <a href="#">facebook</a>
-            <a href="#">twitter</a>
-            <a href="#">instagram</a>
-            <a href="#">pinterest</a>
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/shem.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>I never thought a regular checkup would reveal something serious. This place helped me act fast.</p>
+              <h3>Shem Christian</h3><br>
+              <p class="review-role">Routine Lung Screening</p>
+            </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
         </div>
+        <div class="review-card">
+          <div class="review-top">
+            <img src="/static/images/group/rexlin.jpg" alt="Reviewer" class="reviewer-img">
+            <div class="review-text">
+              <p>Thanks to the advanced diagnosis tools, I got the help I needed before it was too late.</p>
+              <h3>Rexlin Nadar</h3><br>
+              <p class="review-role">Recovered Lung Patient</p>
 
-        <div class="box">
-            <h2 class="logo"><span>L</span>inks</h2>
+            </div>
+          </div>
+          <div class="review-stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span class="empty-star">★</span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+  </div>
+  
 
-            <a href="#">home</a>
-            <a href="#">about</a>
-            <a href="#">Doctor</a>
-            <a href="#">Review</a>
-            <a href="#">contact</a>
-            <a href="#">blog</a>
-        </div>        
-    </section>
+  <!-- contact us  -->
+  <section class="contact-section" id="contact">
+    <div class="contact-container">
+      <div class="contact-content">
+        <h2 class="contact-title">Contact Us</h2>
+        <p class="contact-text">
+          Concerned about lung health? Our support team can guide you through using our AI detection system and explain your results. We're committed to providing clear, compassionate responses within 24 hours.
+        </p>
+        
+        <div class="contact-info">
+          <div class="info-group">
+            <h3>Address</h3>
+            <p>402871 Sugar Camp Road,<br>Owatonna, Minnesota,<br>55025060</p>
+          </div>
+          
+          <div class="info-group">
+            <h3>Phone</h3>
+            <p>000-000-0000</p>
+          </div>
+          
+          <div class="info-group">
+            <h3>Email</h3>
+            <p>Doctors@temporary-mail</p>
+          </div>
+        </div>
+        
+        <div class="social-links">
+          <h3>Connect with us</h3>
+          
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <!-- Add your social icons here -->
+        </div>
+      </div>
+      
+      <div class="contact-form">
+        <h3>Send Message</h3>
+        <form>
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="______">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="______">
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Type your Message..."></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Add this right before </body> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const images = document.querySelectorAll('.slider-img');
+      const sliderContainer = document.querySelector('.about-right');
+      
+      if (images.length > 0) {
+        let currentIndex = 0;
+        let interval;
+        
+        // Initialize first image
+        images[currentIndex].classList.add('active');
+        
+        function startSlider() {
+          interval = setInterval(function() {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+          }, 2000);
+        }
+        
+        // Start the slider
+        startSlider();
+        
+        // Pause on hover
+        if (sliderContainer) {
+          sliderContainer.addEventListener('mouseenter', function() {
+            clearInterval(interval);
+            console.log("Slider paused");
+          });
+          
+          sliderContainer.addEventListener('mouseleave', function() {
+            // Clear any existing interval before starting new one
+            clearInterval(interval);
+            startSlider();
+            console.log("Slider resumed");
+          });
+        }
+      }
+    });
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-    <script src="/static/main.js"></script>
+    // Counter animation
+document.addEventListener('DOMContentLoaded', function() {
+  const counters = document.querySelectorAll('.stat-number');
+  const animationDuration = 2000;
+  
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-count');
+    const increment = target / (animationDuration / 16);
+    let current = 0;
+    
+    const updateCounter = () => {
+      current += increment;
+      if (current < target) {
+        counter.textContent = Math.ceil(current);
+        requestAnimationFrame(updateCounter);
+      } else {
+        counter.textContent = target % 1 === 0 ? target : target.toFixed(1);
+      }
+    };
+    
+    updateCounter();
+  });
+});
+    </script>
 </body>
-
 </html>

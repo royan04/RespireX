@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body, html {
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+  }
+  
+  .background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 80px 20px 40px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0ef;
+  }
+  
+  .navbar .nav-items {
+    display: flex;
+    gap: 25px;
+  }
+  
+  .navbar .nav-items a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .navbar .nav-items a:hover {
+    color: #0ef;
+  }
+  
+  
+  
+  .feature-card-inner {
+    transition: transform 0.4s ease;
+  }
+  
+  .feature-card:hover .feature-card-inner {
+    transform: scale(1.08);
+  }
+  
+  .feature-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    justify-items: center;
+    margin-top: 30px;
+  }
+  
+  .feature-card {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 20px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,255,255,0.3);
+    opacity: 0;
+    transform: translateX(0);
+  }
+  
+  .slide-left {
+    animation: slideFromFarLeft 1s ease-out forwards;
+  }
+  
+  .slide-right {
+    animation: slideFromFarRight 1s ease-out forwards;
+  }
+  
+  @keyframes slideFromFarLeft {
+    0% { transform: translateX(-100vw); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slideFromFarRight {
+    0% { transform: translateX(100vw); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+  }
+  
+  .feature-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .card-btn {
+    background: transparent;
+    color: #0ef;
+    border: 2px solid #0ef;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.4s;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .card-btn:hover {
+    background: #0ef;
+    color: #000;
+    box-shadow: 0 0 15px #0ef;
+  }
+  
+  /* Report Generation Section */
+  .chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+  }
+  
+  .chat-heading {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #0ef;
+    animation: glow 2s infinite alternate;
+  }
+  
+  .chat-card {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    animation: bounceIn 1s ease-out;
+  }
+  
+  @keyframes bounceIn {
+    0% { transform: translateY(100px); opacity: 0; }
+    60% { transform: translateY(-10px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes glow {
+    from { text-shadow: 0 0 10px #0ef; }
+    to { text-shadow: 0 0 20px #0ef, 0 0 30px #0ef; }
+  }

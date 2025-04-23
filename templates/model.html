@@ -1,48 +1,76 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RespireX - Analysis</title>
+  <link rel="stylesheet" href="/static/home.css">
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-100">
-    <div class="border-2 border-black p-16">
-        <div class="flex flex-col items-center">
-            <label for="file-upload" class="flex items-center justify-center w-48 h-48 bg-gray-700 rounded-full cursor-pointer">
-                <i class="fas fa-upload text-white text-6xl"></i>
-                <input id="file-upload" type="file" class="hidden">
-            </label>
-            <div class="border-t-2 border-black w-full mt-8"></div>
-            <button class="mt-4 px-6 py-2 bg-blue-500 text-white text-lg font-bold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
-                Upload Files
-            </button>
-        </div>
-    </div>
-</body>
+<body>
+  <!-- Background Video -->
+  <video autoplay muted loop class="background-video">
+    <source src="/static/images/dashboard (2).mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-<script>
-    document.getElementById('file-upload').addEventListener('change', function (event) {
-        const file = event.target.files[0];
-        if (file) {
-            // Optional: Preview or validate the file
-            console.log("File selected:", file.name);
-    
-            // Store it in a variable or send it to the server
-            const formData = new FormData();
-            formData.append("image", file);
-    
-            // Send to backend for prediction
-            fetch("/predict", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert("Prediction: " + data.result);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-            });
-        }
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">🫁 RespireX</div>
+    <div class="nav-items">
+      <a href="#">Contact Us</a>
+      <a href="#">Sign Out</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Feature Cards -->
+    <div class="feature-section">
+      <div class="feature-card slide-left" style="animation-delay: 0.2s;">
+        <div class="feature-card-inner">
+          <h3>Upload X-Ray</h3>
+          <p>Upload your chest X-ray images for AI-powered analysis and detection of lung abnormalities.</p>
+          <button class="card-btn" id="uploadBtn">Upload Images</button>
+        </div>
+      </div>
+
+      <div class="feature-card slide-right" style="animation-delay: 0.4s;">
+        <div class="feature-card-inner">
+          <h3>Medical Notes</h3>
+          <p>Record and manage your medical observations and doctor's recommendations.</p>
+          <button class="card-btn" id="notesBtn">View Notes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Report Generation Section -->
+    <div class="chat-wrapper">
+      <h2 class="chat-heading">Generate Report</h2>
+      <div class="chat-card">
+        <h3>AI Analysis Report</h3>
+        <p>Get detailed diagnostic reports based on your uploaded X-ray images.</p>
+        <button class="card-btn" id="generateReportBtn">Generate Report</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.style.opacity = '1';
+      });
+
+      document.getElementById("uploadBtn").addEventListener("click", function() {
+        window.location.href = "/upload";
+      });
+
+      document.getElementById("notesBtn").addEventListener("click", function() {
+        window.location.href = "/notes";
+      });
+
+      document.getElementById("generateReportBtn").addEventListener("click", function() {
+        window.location.href = "/report";
+      });
     });
-    </script>
-    
+  </script>
+</body>
 </html>
