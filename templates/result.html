@@ -1,0 +1,64 @@
+<html>
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="border-2 border-black p-16">
+        <div class="flex flex-col items-center">
+            <label for="file-upload" class="flex items-center justify-center w-48 h-48 bg-gray-700 rounded-full cursor-pointer">
+                <i class="fas fa-upload text-white text-6xl"></i>
+                <input id="file-upload" type="file" class="hidden">
+            </label>
+
+            <div class="border-t-2 border-black w-full mt-8"></div>
+
+            <button id="upload-button" class="mt-4 px-6 py-2 bg-blue-500 text-white text-lg font-bold rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">
+                Upload Files
+            </button>
+
+            <p id="result" class="mt-4 text-lg font-semibold text-gray-800"></p>
+        </div>
+    </div>
+</body>
+
+<script>
+    let selectedFile = null;
+
+    // When user selects a file
+    document.getElementById('file-upload').addEventListener('change', function (event) {
+        selectedFile = event.target.files[0];
+        if (selectedFile) {
+            console.log("File selected:", selectedFile.name);
+        }
+    });
+
+    // When user clicks the upload button
+    document.getElementById('upload-button').addEventListener('click', function () {
+        if (!selectedFile) {
+            alert("Please select an image first.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("image", selectedFile);
+
+        fetch("/predict", {
+            method: "POST",
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result) {
+                document.getElementById('result').innerText = "Prediction: " + data.result;
+            } else if (data.error) {
+                document.getElementById('result').innerText = "Error: " + data.error;
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById('result').innerText = "Something went wrong!";
+        });
+    });
+</script>
+</html>
