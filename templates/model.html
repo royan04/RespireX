@@ -29,7 +29,7 @@
         <div class="feature-card-inner">
           <h3>Upload X-Ray</h3>
           <p>Upload your chest X-ray images for AI-powered analysis and detection of lung abnormalities.</p>
-          <a href="result"><button class="card-btn" id="uploadBtn">Upload Images</button></a>
+          <a href="/result"> <button class="card-btn" id="uploadBtn">Upload Images</button>
         </div>
       </div>
 
@@ -48,7 +48,7 @@
       <div class="chat-card">
         <h3>AI Analysis Report</h3>
         <p>Get detailed diagnostic reports based on your uploaded X-ray images.</p>
-        <button class="card-btn" id="generateReportBtn">Generate Report</button>
+        <a href="/report/{{ prediction_id }}" ></a><button class="card-btn" id="generateReportBtn">Generate Report</button>
       </div>
     </div>
   </div>

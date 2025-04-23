@@ -48,17 +48,22 @@
             body: formData,
         })
         .then(response => response.json())
-        .then(data => {
-            if (data.result) {
-                document.getElementById('result').innerText = "Prediction: " + data.result;
-            } else if (data.error) {
-                document.getElementById('result').innerText = "Error: " + data.error;
-            }
-        })
-        .catch(error => {
-            console.error("Error:", error);
-            document.getElementById('result').innerText = "Something went wrong!";
-        });
+
+    .then(data => {
+        const resultElement = document.getElementById('result');
+        if (data.result && data.confidence) {
+            const confidencePercentage = (parseFloat(data.confidence) * 100).toFixed(2);
+            resultElement.innerText = `Prediction: ${data.result} (${confidencePercentage}% confident)`;
+        } else if (data.result) {
+            resultElement.innerText = `Prediction: ${data.result}`;
+        } else if (data.error) {
+            resultElement.innerText = "Error: " + data.error;
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        document.getElementById('result').innerText = "Something went wrong!";
     });
+});
 </script>
 </html>

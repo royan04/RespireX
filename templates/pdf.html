@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Medical Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { text-align: center; color: #1e90ff; }
+        table { width: 100%; margin-top: 30px; border-collapse: collapse; }
+        td, th { padding: 10px; border: 1px solid #ccc; }
+        .footer { margin-top: 40px; font-size: 12px; text-align: center; color: gray; }
+    </style>
+</head>
+<body>
+    <h1>RespireX Medical Report</h1>
+    <p><strong>Report Generated:</strong> {{ prediction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    <p><strong>File Name:</strong> {{ prediction.filename }}</p>
+    <p><strong>Diagnosis:</strong> {{ prediction.prediction }}</p>
+    <p><strong>Confidence:</strong> {{ '%.2f' % prediction.confidence }}%</p>
+
+    <div class="footer">
+        This is an AI-generated prediction. Please consult a medical professional for confirmation.
+    </div>
+</body>
+</html>
