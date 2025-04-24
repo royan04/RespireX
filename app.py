@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, send_file, url_for, redirect 
+
 from flask_sqlalchemy import SQLAlchemy
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
@@ -14,6 +15,8 @@ from reportlab.lib.units import inch
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.platypus import Paragraph, SimpleDocTemplate, Spacer, Frame
 from reportlab.lib.enums import TA_CENTER
+from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash
 
 
 app = Flask(__name__)
@@ -38,6 +41,12 @@ class Prediction(db.Model):
     prediction = db.Column(db.String(50))
     confidence = db.Column(db.Float)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow) 
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
+    role = db.Column(db.String(20), nullable=False)  # 'doctor' or 'patient'
 
 # Route for prediction
 @app.route('/predict', methods=['POST'])
@@ -90,6 +99,14 @@ def download_report(prediction_id):
     )
 
 def generate_medical_report(file_name, prediction, confidence, save_path):
+    from reportlab.lib.colors import HexColor
+
+    # Dummy patient info
+    patient_name = "NA"
+    age = "NA"
+    gender = "NA"
+    report_id = f"RPT-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+
     # Disease descriptions dictionary
     disease_info = {
         "Pneumonia": {
@@ -117,67 +134,88 @@ def generate_medical_report(file_name, prediction, confidence, save_path):
         "advice": "Consult a healthcare provider for more information."
     })
 
+    # Determine risk level
+    if confidence > 90:
+        risk = "🟥 High"
+    elif confidence > 70:
+        risk = "🟧 Moderate"
+    else:
+        risk = "🟩 Low"
+
     # Set up canvas
     c = canvas.Canvas(save_path, pagesize=A4)
     width, height = A4
 
-    # Styles
-    title_style = ParagraphStyle(name="Title", fontSize=20, alignment=TA_CENTER, spaceAfter=20)
-    normal_style = getSampleStyleSheet()["BodyText"]
-    bold_style = ParagraphStyle(name="Bold", parent=normal_style, fontSize=12, leading=16)
-
     # Title
-    title = Paragraph("🫁 <b>RespireX Medical Report</b>", title_style)
-    title.wrapOn(c, width - 2*inch, height)
-    title.drawOn(c, inch, height - inch)
+    c.setFont("Helvetica-Bold", 20)
+    c.drawCentredString(width / 2, height - 60, "🫁 RespireX Medical Report")
 
-    # Report Info
-    y = height - 1.5 * inch
-    report_data = f"""
-    <b>File Name:</b> {file_name}<br/>
-    <b>Prediction:</b> {prediction}<br/>
-    <b>Confidence:</b> {confidence:.2f}%<br/>
-    <b>Generated At:</b> {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}<br/>
+    # Draw box for patient info
+    c.setStrokeColor(HexColor("#999999"))
+    c.rect(inch, height - 130, width - 2 * inch, 60, stroke=1, fill=0)
+    c.setFont("Helvetica", 12)
+    c.drawString(inch + 10, height - 100, f"Patient Name: {patient_name}")
+    c.drawString(inch + 220, height - 100, f"Age: {age}")
+    c.drawString(inch + 320, height - 100, f"Gender: {gender}")
+    c.drawString(inch + 10, height - 115, f"Report ID: {report_id}")
+    c.drawString(inch + 250, height - 115, f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+
+    # Draw horizontal line
+    c.line(inch, height - 140, width - inch, height - 140)
+
+    # Prediction & Confidence
+    c.setFont("Helvetica-Bold", 14)
+    c.drawString(inch, height - 170, f"🩺 Prediction Summary")
+    c.setFont("Helvetica", 12)
+    c.drawString(inch + 20, height - 190, f"Diagnosis: {prediction}")
+    c.drawString(inch + 20, height - 210, f"Confidence: {confidence:.2f}%")
+    c.drawString(inch + 20, height - 230, f"Risk Level: {risk}")
+
+    # Draw horizontal line
+    c.line(inch, height - 245, width - inch, height - 245)
+
+    # Disease Details Box
+    text_y = height - 270
+    text_width = width - 2 * inch
+    styles = getSampleStyleSheet()
+    body_style = styles["BodyText"]
+    body_style.fontSize = 11
+    body_style.leading = 16
+
+    disease_text = f"""
+    <b>Overview:</b><br/>{disease_data['overview']}<br/><br/>
+    <b>Cause & Risk:</b><br/>{disease_data['cause']}<br/><br/>
+    <b>Medical Advice:</b><br/>{disease_data['advice']}
     """
-    report_para = Paragraph(report_data, bold_style)
-    report_para.wrapOn(c, width - 2*inch, height)
-    report_para.drawOn(c, inch, y - 40)
-
-    # Disease Section
-    disease_section = f"""
-    <br/><br/>
-    <b>🧠 Disease Overview:</b><br/>
-    {disease_data["overview"]}<br/><br/>
-
-    <b>📌 Cause and Risk Factors:</b><br/>
-    {disease_data["cause"]}<br/><br/>
-
-    <b>✅ Suggested Medical Action:</b><br/>
-    {disease_data["advice"]}
-    """
-    p = Paragraph(disease_section, normal_style)
-    f = Frame(inch, inch + 60, width - 2*inch, y - 200, showBoundary=0)
+    p = Paragraph(disease_text, body_style)
+    f = Frame(inch, inch + 80, text_width, text_y - inch - 80, showBoundary=0)
     f.addFromList([p], c)
 
-    # Disclaimer & Footer
+    # Footer & Disclaimer
     c.setFont("Helvetica-Oblique", 9)
     c.drawCentredString(width / 2, 60, "Disclaimer: This is an AI-generated report. Please consult a licensed medical professional.")
     c.drawCentredString(width / 2, 45, "© 2025 RespireX AI Diagnostic System v1.0")
 
-    # Save
     c.showPage()
     c.save()
-
 
 # Route for home page
 @app.route('/')
 def home():
     return render_template('index.html')
 
+@app.route('/signup')
+def signup():
+    return render_template('login.html')
+
 # Route for model page
 @app.route('/model')
 def model_page():
-    return render_template('model.html')
+    return render_template('doctors.html')
+
+@app.route('/signout')
+def sign_out():
+    return render_template('index.html')
 
 # Route for result page
 @app.route('/result')
@@ -189,6 +227,21 @@ def result():
 def report():
     all_predictions = Prediction.query.order_by(Prediction.id.desc()).all()
     return render_template('report.html', predictions=all_predictions)
+
+@app.route('/login', methods=['POST'])
+def login():
+    email = request.form['email']
+    password = request.form['password']
+    role = request.form['role']
+
+    user = User.query.filter_by(email=email, role=role).first()
+
+    if user and check_password_hash(user.password, password):
+        if role == 'doctor':
+            return redirect('/model')
+        elif role == 'patient':
+            return redirect('/report')
+    return "Invalid credentials or role mismatch", 401
 
 if __name__ == '__main__':
     with app.app_context():

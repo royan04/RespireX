@@ -9,62 +9,54 @@
 <body>
   <!-- Background Video -->
   <video autoplay muted loop class="background-video">
-    <source src="/static/images/dashboard (2).mp4" type="video/mp4" />
+    <source src="/static/images/dashboard.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
   <!-- Navbar -->
   <div class="navbar">
-    <div class="logo">🫁 RespireX</div>
-    <div class="nav-items">
-      <a href="#">Contact Us</a>
-      <a href="#">Sign Out</a>
+    <div class="nav-left">
+      <img src="/static/images/logo1.png" alt="Logo" class="logo">
+      <span class="brand-name"> RespireX</span>
+    </div>
+    <div class="nav-right">
+      <a href="/signout" class="button">Sign Out</a>
     </div>
   </div>
 
   <div class="container">
-    <!-- Feature Cards -->
+    <h1 class="typewriter">Advanced Lung Analysis</h1>
+
+    <!-- Upload Card (Top) -->
     <div class="feature-section">
       <div class="feature-card slide-left" style="animation-delay: 0.2s;">
         <div class="feature-card-inner">
           <h3>Upload X-Ray</h3>
           <p>Upload your chest X-ray images for AI-powered analysis and detection of lung abnormalities.</p>
-          <a href="/result"> <button class="card-btn" id="uploadBtn">Upload Images</button>
-        </div>
-      </div>
-
-      <div class="feature-card slide-right" style="animation-delay: 0.4s;">
-        <div class="feature-card-inner">
-          <h3>Medical Notes</h3>
-          <p>Record and manage your medical observations and doctor's recommendations.</p>
-          <button class="card-btn" id="notesBtn">View Notes</button>
+          <a href="/result"><button class="card-btn" id="uploadBtn">Upload Images</button></a>
         </div>
       </div>
     </div>
 
-    <!-- Report Generation Section -->
-    <div class="chat-wrapper">
-      <h2 class="chat-heading">Generate Report</h2>
-      <div class="chat-card">
+    <!-- Report Card (Bottom) -->
+    <div class="report-wrapper">
+      <h2 class="report-heading">Generate Report</h2>
+      <div class="report-card slide-right" style="animation-delay: 0.4s;">
         <h3>AI Analysis Report</h3>
         <p>Get detailed diagnostic reports based on your uploaded X-ray images.</p>
-        <a href="/report/{{ prediction_id }}" ></a><button class="card-btn" id="generateReportBtn">Generate Report</button>
+        <a href="/report/{{ prediction_id }}"></a><button class="card-btn" id="generateReportBtn">Generate Report</button>
       </div>
     </div>
   </div>
 
   <script>
     window.addEventListener('load', () => {
-      document.querySelectorAll('.feature-card').forEach(card => {
+      document.querySelectorAll('.feature-card, .report-card').forEach(card => {
         card.style.opacity = '1';
       });
 
       document.getElementById("uploadBtn").addEventListener("click", function() {
         window.location.href = "/upload";
-      });
-
-      document.getElementById("notesBtn").addEventListener("click", function() {
-        window.location.href = "/notes";
       });
 
       document.getElementById("generateReportBtn").addEventListener("click", function() {

@@ -7,12 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
         @keyframes glowingBorder {
             0% { background-position: 0% 50%; }
             100% { background-position: 400% 50%; }
@@ -26,16 +20,6 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(-45deg, 
-                rgba(13, 36, 56, 0.9),
-                rgba(28, 57, 174, 0.9),
-                rgba(0, 201, 255, 0.9),
-                rgba(146, 254, 157, 0.9));
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
         }
         
         .glowing-card::before {
@@ -52,55 +36,80 @@
             animation: glowingBorder 8s linear infinite;
             opacity: 0.7;
         }
+        
+        .confidence-meter {
+            margin-top: 15px;
+        }
+        
+        .confidence-container {
+            width: 100%;
+            height: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(to right, #4CAF50, #8BC34A);
+            transition: width 0.5s ease;
+        }
+        
+        .confidence-value {
+            font-size: 0.8rem;
+            color: #666;
+            text-align: center;
+        }
     </style>
 </head>
-<body class="min-h-screen overflow-x-hidden">
-    <!-- Animated Background -->
-    <div class="fixed top-0 left-0 w-full h-full -z-10 gradient-bg"></div>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <!-- Upload Card -->
+    <div class="relative bg-white rounded-2xl p-12 max-w-md w-full shadow-xl animate-fadeIn glowing-card">
+        <div class="flex flex-col items-center text-center">
+            <!-- Header -->
+            <div class="mb-8 px-4">
+                <h1 class="text-3xl font-bold mb-3 text-cyan-600">Upload Chest X-Ray</h1>
+                <p class="text-gray-600">For AI-powered lung abnormality detection</p>
+            </div>
 
-    <!-- Main Container -->
-    <div class="flex items-center justify-center min-h-screen p-4">
-        <!-- Upload Card -->
-        <div class="relative bg-black bg-opacity-70 rounded-2xl p-12 max-w-2xl w-full shadow-lg backdrop-filter backdrop-blur-sm border border-teal-400 border-opacity-50 animate-fadeIn glowing-card">
-            <div class="flex flex-col items-center text-center">
-                <!-- Header -->
-                <div class="mb-8 px-4">
-                    <h1 class="text-3xl md:text-4xl font-bold mb-3 text-cyan-400 drop-shadow-lg">Upload Chest X-Ray</h1>
-                    <p class="text-lg text-gray-300">For AI-powered lung abnormality detection</p>
+            <!-- Upload Area -->
+            <div class="w-full flex flex-col items-center my-6">
+                <label for="file-upload" class="flex items-center justify-center w-40 h-40 rounded-full bg-cyan-100 border-2 border-dashed border-cyan-400 cursor-pointer transition-all duration-300 hover:bg-cyan-200 hover:scale-105 text-cyan-600">
+                    <i class="fas fa-x-ray text-5xl"></i>
+                    <input id="file-upload" type="file" accept="image/*" class="hidden">
+                </label>
+                
+                <p id="file-name" class="mt-4 text-gray-600 text-sm max-w-full truncate">No file selected</p>
+                
+                <img id="file-preview" class="mt-4 max-w-full max-h-64 rounded-lg border border-cyan-200 hidden">
+            </div>
+
+            <!-- Divider -->
+            <div class="border-t border-cyan-200 w-full my-6"></div>
+
+            <!-- Upload Button -->
+            <button id="upload-button" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-teal-400 text-white text-lg font-bold rounded-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" disabled>
+                Analyze X-Ray
+            </button>
+
+            <!-- Loading Indicator -->
+            <div id="loading" class="mt-6 hidden">
+                <div class="flex items-center text-cyan-600 text-lg">
+                    <i class="fas fa-circle-notch animate-spin mr-3"></i>
+                    <span>Analyzing your X-Ray...</span>
                 </div>
+            </div>
 
-                <!-- Upload Area -->
-                <div class="w-full flex flex-col items-center my-6">
-                    <label for="file-upload" class="flex items-center justify-center w-40 h-40 md:w-48 md:h-48 rounded-full bg-teal-900 bg-opacity-20 border-2 border-dashed border-cyan-400 cursor-pointer transition-all duration-300 hover:bg-opacity-30 hover:scale-105 text-cyan-400">
-                        <i class="fas fa-x-ray text-5xl md:text-6xl"></i>
-                        <input id="file-upload" type="file" accept="image/*" class="hidden">
-                    </label>
-                    
-                    <p id="file-name" class="mt-4 text-gray-300 text-sm md:text-base max-w-full truncate">No file selected</p>
-                    
-                    <img id="file-preview" class="mt-4 max-w-full max-h-64 rounded-lg border border-teal-400 border-opacity-30 hidden">
-                </div>
-
-                <!-- Divider -->
-                <div class="border-t border-teal-400 border-opacity-50 w-full my-6"></div>
-
-                <!-- Upload Button -->
-                <button id="upload-button" class="mt-2 px-8 py-3 bg-gradient-to-r from-cyan-400 to-teal-300 text-gray-900 text-lg font-bold rounded-full hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-cyan-400 focus:ring-opacity-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" disabled>
-                    Analyze X-Ray
-                </button>
-
-                <!-- Loading Indicator -->
-                <div id="loading" class="mt-6 hidden">
-                    <div class="flex items-center text-cyan-400 text-lg">
-                        <i class="fas fa-circle-notch animate-spin mr-3"></i>
-                        <span>Analyzing your X-Ray...</span>
+            <!-- Results Container -->
+            <div id="result-container" class="mt-6 w-full p-4 bg-cyan-50 rounded-lg border-l-4 border-cyan-500 text-left hidden">
+                <h3 class="text-xl font-semibold text-cyan-600 mb-2">Analysis Result:</h3>
+                <p id="result" class="text-gray-700"></p>
+                <div id="confidence-display" class="confidence-meter hidden">
+                    <div class="confidence-container">
+                        <div id="confidence-bar" class="confidence-fill"></div>
                     </div>
-                </div>
-
-                <!-- Results Container -->
-                <div id="result-container" class="mt-6 w-full p-4 bg-teal-900 bg-opacity-20 rounded-lg border-l-4 border-cyan-400 text-left hidden">
-                    <h3 class="text-xl font-semibold text-cyan-400 mb-2">Analysis Result:</h3>
-                    <p id="result" class="text-gray-100"></p>
+                    <div id="confidence-value" class="confidence-value"></div>
                 </div>
             </div>
         </div>
@@ -114,6 +123,9 @@
         const resultContainer = document.getElementById('result-container');
         const resultText = document.getElementById('result');
         const loading = document.getElementById('loading');
+        const confidenceDisplay = document.getElementById('confidence-display');
+        const confidenceBar = document.getElementById('confidence-bar');
+        const confidenceValue = document.getElementById('confidence-value');
         let selectedFile = null;
 
         // Handle file selection
@@ -150,6 +162,7 @@
             uploadButton.disabled = true;
             loading.classList.remove('hidden');
             resultContainer.classList.add('hidden');
+            confidenceDisplay.classList.add('hidden');
 
             const formData = new FormData();
             formData.append("image", selectedFile);
@@ -164,7 +177,27 @@
                 resultContainer.classList.remove('hidden');
                 
                 if (data.result) {
-                    resultText.textContent = data.result;
+                    // Display result with confidence if available
+                    if (data.confidence) {
+                        const confidencePercentage = (parseFloat(data.confidence)).toFixed(2);
+                        resultText.textContent = data.result;
+                        
+                        // Show confidence display
+                        confidenceBar.style.width = `${confidencePercentage}%`;
+                        confidenceValue.textContent = `${confidencePercentage}% confidence`;
+                        confidenceDisplay.classList.remove('hidden');
+                        
+                        // Adjust bar color based on confidence level
+                        if (confidencePercentage < 40) {
+                            confidenceBar.style.background = 'linear-gradient(to right, #f44336, #ff9800)';
+                        } else if (confidencePercentage < 70) {
+                            confidenceBar.style.background = 'linear-gradient(to right, #ff9800, #FFEB3B)';
+                        } else {
+                            confidenceBar.style.background = 'linear-gradient(to right, #4CAF50, #8BC34A)';
+                        }
+                    } else {
+                        resultText.textContent = data.result;
+                    }
                 } else if (data.error) {
                     resultText.textContent = "Error: " + data.error;
                 } else {
